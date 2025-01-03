@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Yukti - Empowering Underprivileged Children</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-jvectormap-2.0.5/jquery-jvectormap.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=cabinet-grotesk@100,200,300,400,500,600,700&display=swap">
+</head>
+<body>
+    <!-- Loader Screen -->
+    <div class="loader-wrapper">
+        <div class="loader-content">
+            <img src="logo-light.png" alt="Project Yukti Logo" class="loader-logo">
+        </div>
+    </div>
+    <div id="loading-screen" class="loading-screen">
+        <div class="logo-container2">
+            <img src="img/only-hand.png" alt="Hands" class="hands-image">
+            <img src="img/only-bulb.png" alt="Bulb" class="bulb-image">
+        </div>
+    </div>
+    <style>
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container2 {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .hands-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: fadeInHands 1s ease-in forwards;
+        }
+
+        .bulb-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: fadeInBulb 1s ease-in 1s forwards, glowEffect 2s infinite 2s;
+        }
+
+        @keyframes fadeInHands {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInBulb {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glowEffect {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(78, 205, 196, 0.8));
+            }
+            100% {
+                filter: drop-shadow(0 0 5px rgba(78, 205, 196, 0.5));
+            }
+        }
+    </style>
+    <div class="brand-corner">
+        <div class="brand-container">
+            <div class="logo-container">
+                <img src="logo-light.png" alt="Project Yukti Logo" class="logo">
+            </div>
+            <h1 class="brand-name">Project <span>Yukti</span></h1>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-elements">
+                <ul class="nav-links">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">
+                            <i class="fas fa-info-circle"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#impact" class="nav-link">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Our Impact</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>What We Do</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link donate-btn">
+                            <i class="fas fa-heart"></i>
+                            <span>Support Us</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="mobile-menu">
+                    <div class="menu-bar"></div>
+                    <div class="menu-bar"></div>
+                    <div class="menu-bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Empowering<br>Through Education</h1>
+            <p>Building a brighter future for underprivileged children through quality education and life skills.</p>
+            <div class="hero-cta">
+                <a href="#about" class="cta-button">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <div class="image-container">
+                        <img src="img/img5.jpg" alt="Children Learning">
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="image-container">
+                        <img src="img/img6.jpg" alt="Education Impact">
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="image-container">
+                        <img src="img/img3.jpg" alt="Community Support">
+                    </div>
+                </div>
+                <div class="slide-controls">
+                    <button class="slide-dot active" data-index="0" aria-label="Slide 1"></button>
+                    <button class="slide-dot" data-index="1" aria-label="Slide 2"></button>
+                    <button class="slide-dot" data-index="2" aria-label="Slide 3"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: black;">About Project Yukti</h2>
+                <p class="subtitle">Empowering Dreams, Transforming Lives</p>
+            </div>
+
+            <div class="about-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" data-tab="about">
+                        <i class="fas fa-info-circle"></i> About Us
+                    </button>
+                    <button class="tab-btn" data-tab="mission">
+                        <i class="fas fa-bullseye"></i> Our Mission
+                    </button>
+                    <button class="tab-btn" data-tab="vision">
+                        <i class="fas fa-eye"></i> Our Vision
+                    </button>
+                    <button class="tab-btn" data-tab="sdgs">
+                        <i class="fas fa-globe-americas"></i> SDGs
+                    </button>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="about-pane">
+                        <div class="text-content">
+                            <h3>Who We Are</h3>
+                            <p>Project Yukti is a student-led initiative dedicated to bridging the educational gap for underprivileged children. Through innovative teaching methods and personalized attention, we strive to make quality education accessible to every child.</p>
+                            <div class="about-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <h4>Educational Excellence</h4>
+                                    <p>Providing quality education through innovative teaching methods and personalized attention</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-hands-helping"></i>
+                                    <h4>Community Impact</h4>
+                                    <p>Creating lasting change in communities through education and empowerment</p>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-users"></i>
+                                    <h4>Student-Led Initiative</h4>
+                                    <p>Empowering students to make a difference in their communities</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="mission-pane">
+                        <div class="text-content">
+                            <h3>Our Mission</h3>
+                            <p>To provide quality education and essential resources to underprivileged children, enabling them to build a better future for themselves and their communities.</p>
+                        </div>
+                        <div class="mission-pillars">
+                            <div class="pillar">
+                                <i class="fas fa-book-reader"></i>
+                                <h4>Quality Education</h4>
+                                <p>Delivering comprehensive educational support through innovative teaching methods and personalized attention</p>
+                            </div>
+                            <div class="pillar">
+                                <i class="fas fa-hands-helping"></i>
+                                <h4>Community Support</h4>
+                                <p>Building strong partnerships with local communities to create sustainable educational ecosystems</p>
+                            </div>
+                            <div class="pillar">
+                                <i class="fas fa-lightbulb"></i>
+                                <h4>Innovation</h4>
+                                <p>Implementing creative teaching approaches that make learning engaging and effective</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="vision-pane">
+                        <div class="text-content">
+                            <h3>Our Vision</h3>
+                            <p>We envision a world where every child has access to quality education, regardless of their socioeconomic background. A future where education breaks the cycle of poverty and creates opportunities for all.</p>
+                        </div>
+                        <div class="vision-goals">
+                            <div class="goal">
+                                <div class="goal-icon">2025</div>
+                                <p>Impact 1000+ students across multiple states through our comprehensive educational programs</p>
+                            </div>
+                            <div class="goal">
+                                <div class="goal-icon">2027</div>
+                                <p>Establish learning centers in 50+ communities to provide accessible education to underprivileged children</p>
+                            </div>
+                            <div class="goal">
+                                <div class="goal-icon">2030</div>
+                                <p>Create a sustainable and scalable education model that can be implemented nationwide</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="sdgs-pane">
+                        <div class="sdgs-grid">
+                            <div class="sdg-item">
+                                <img src="img/sdg4.png" alt="SDG 4">
+                                <h4>Quality Education</h4>
+                                <p>Ensuring inclusive and equitable quality education for all</p>
+                            </div>
+                            <div class="sdg-item">
+                                <img src="img/sdg17.png" alt="SDG 17">
+                                <h4>Partnerships for the Goals</h4>
+                                <p>Building strong collaborations with schools and communities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-buttons">
+                <a href="#contact" class="btn-primary">Get Involved</a>
+                <a href="#team" class="btn-secondary">Our Team</a>
+            </div>
+        </div>
+    </section>
+
+        <!-- World Map Section -->
+        <section class="world-map-section">
+            <div class="container">
+                <h2>Our Global Impact</h2>
+                <div class="map-container">
+                    <div id="world-map"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="events" class="section">
+            <div class="container">
+                <h2 class="section-title">Upcoming Events</h2>
+                <div class="events-container">
+                    <div class="events-calendar">
+                        <div class="calendar-header">
+                            <button id="prevMonth" class="calendar-nav">&lt;</button>
+                            <h3 id="currentMonth"></h3>
+                            <button id="nextMonth" class="calendar-nav">&gt;</button>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="calendar-days">
+                                <div>Sun</div>
+                                <div>Mon</div>
+                                <div>Tue</div>
+                                <div>Wed</div>
+                                <div>Thu</div>
+                                <div>Fri</div>
+                                <div>Sat</div>
+                            </div>
+                            <div id="calendarDates" class="calendar-dates"></div>
+                        </div>
+                    </div>
+                    <div class="events-list">
+                        <h3>Events This Month</h3>
+                        <div id="eventsList">
+                            <div class="event-loading">Loading events...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <section id="impact" class="impact-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Impact</h2>
+                <p class="subtitle">Transforming Education, Empowering Lives</p>
+            </div>
+
+            <div class="impact-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Students Impacted</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Partner Organizations</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Volunteers</div>
+                </div>
+            </div>
+
+            <div class="impact-showcase">
+                <div class="showcase-text">
+                    <h3>Making a Difference</h3>
+                    <p>Through our dedicated programs and initiatives, we're creating lasting change in education:</p>
+                    <div class="impact-areas">
+                        <div class="impact-area">
+                            <div class="area-icon"><i class="fas fa-laptop-code"></i></div>
+                            <div class="area-content">
+                                <h4>Digital Literacy</h4>
+                                <p>Empowering students with essential digital skills</p>
+                            </div>
+                        </div>
+                        <div class="impact-area">
+                            <div class="area-icon"><i class="fas fa-brain"></i></div>
+                            <div class="area-content">
+                                <h4>STEM Education</h4>
+                                <p>Fostering innovation and scientific thinking</p>
+                            </div>
+                        </div>
+                        <div class="impact-area">
+                            <div class="area-icon"><i class="fas fa-users"></i></div>
+                            <div class="area-content">
+                                <h4>Life Skills</h4>
+                                <p>Building confidence and essential life skills</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-gallery">
+                    <div class="gallery-main">
+                        <img src="img/img2.avif" alt="Educational Activities" class="main-image">
+                    </div>
+                    <div class="gallery-grid">
+                        <img src="img/img3.jpg" alt="Life Skills Training">
+                        <img src="img/img4.webp" alt="Community Engagement">
+                        <img src="img/img5.jpg" alt="Student Development">
+                    </div>
+                </div>
+            </div>
+
+            <div class="impact-cta">
+                <div class="cta-content">
+                    <h3>Let's Join Hands</h3>
+                    <p>Be part of our journey in transforming education</p>
+                    <a href="#volunteer" class="cta-button">Donate Now<i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2>What We Do</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Free Education</h3>
+                    <p>We provide free education to underprivileged children and assist them in their career.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <h3>Skill-Based Workshops</h3>
+                    <p>Teaching communication, leadership, and creativity to underprivileged children.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-user-graduate"></i>
+                    <h3>Unpaid Internships</h3>
+                    <p>Providing college students with certificates and work experience while they mentor others.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Career Development</h3>
+                    <p>Offering sessions on personality building, critical thinking, and career counseling.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Affordable Paid Workshops</h3>
+                    <p>Conducting low-cost sessions in private schools to fund free programs.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Collaborations</h3>
+                    <p>Partnering with brands and influencers for sponsorships and community support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonials-slider">
+                <div class="slider-container">
+                    <div class="slider-track">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left"></i>
+                                <p>"Project Yukti has transformed the lives of children in our community. Their dedication to education and empowerment is truly inspiring. The impact they've made will last for generations."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Rajesh Kumar</h4>
+                                    <p>Community Leader</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left"></i>
+                                <p>"The commitment of Project Yukti to providing quality education to underprivileged children is remarkable. They don't just teach; they build futures and inspire dreams."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Priya Sharma</h4>
+                                    <p>Education Advocate</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left"></i>
+                                <p>"As a volunteer, I've witnessed firsthand the incredible work Project Yukti does. Their holistic approach to education and child development sets them apart from others."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Amit Patel</h4>
+                                    <p>Volunteer</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <i class="fas fa-quote-left"></i>
+                                <p>"The positive change I see in our children since Project Yukti started working with them is remarkable. They've given our community hope for a brighter future."</p>
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4>Meera Reddy</h4>
+                                    <p>Parent</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="slider-arrow prev">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-arrow next">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="video-testimonial-button">
+                <a href="#" class="btn-video" id="videoButton">
+                    <i class="fas fa-play-circle"></i>
+                    Video Testimonials
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/oayIThY5zis?si=DfavnxHGxpCXzgil" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Connect With Us</h2>
+                <p>Have questions or want to get involved? We'd love to hear from you!</p>
+            </div>
+            <div class="contact-form">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" name="phone" class="form-control" placeholder="Your Phone Number">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" class="form-control" placeholder="Subject">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo-light.png" alt="Project Yukti Logo">
+                    <p>Transforming education through innovation and accessibility.</p>
+                    <p>Made by <a style="color: cyan; text-decoration: none; cursor: pointer;" href="https://nodestech.site/" target="_blank">Nodes </a>with love</p>
+
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Work</a></li>
+                        <li><a href="#impact">Impact</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Bhubaneswar Odisha, India</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p><a href="tel:+916367463650">+91 6367463650</a></p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p><a href="mailto:official.projectyukti@gmail.com">official.projectyukti@gmail.com</a></p>
+                        </div>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://www.instagram.com/projectyukti" target="_blank" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/projectyukti" target="_blank" class="social-icon">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Project Yukti. All rights reserved.</p>
+            </div>
+            
+        </div>
+    </footer>
+    <!-- Donation Popup -->
+    <div id="donationPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <div class="donation-form">
+                <div class="qr-section">
+                    <img src="img/qr-code.jpg" alt="Donation QR Code" class="qr-code">
+                    <p class="qr-info">Scan to donate</p>
+                </div>
+                <form id="donationForm">
+                    <div class="form-group">
+                        <label for="donorName">Name</label>
+                        <input type="text" id="donorName" class="form-control" required placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="donationAmount">Amount (₹)</label>
+                        <input type="number" id="donationAmount" class="form-control" required placeholder="Enter donation amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="donorPhone">Phone Number</label>
+                        <input type="tel" id="donorPhone" class="form-control" required placeholder="Enter your phone number" pattern="[0-9]{10}">
+                    </div>
+                    <div class="form-group">
+                        <label for="transactionId">Transaction ID</label>
+                        <input type="text" id="transactionId" class="form-control" required placeholder="Enter UPI transaction ID">
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Donation</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Modal -->
+    <div class="team-modal" id="teamModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="team-title">Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/ayetri.jpg" alt="Ayetri Chakrabarti">
+                    </div>
+                    <div class="member-info">
+                        <h3>Ayetri Chakrabarti</h3>
+                        <p>Lead Actionist</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/aayush.jpg" alt="Aayush Pandey">
+                    </div>
+                    <div class="member-info">
+                        <h3>Aayush Pandey</h3>
+                        <p>Actionist</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/akanksha.jpg" alt="Akanksha Singh">
+                    </div>
+                    <div class="member-info">
+                        <h3>Akanksha Singh</h3>
+                        <p>Actionist</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/khalid.jpg" alt="Khalid Noazesh Khan">
+                    </div>
+                    <div class="member-info">
+                        <h3>Khalid Noazesh Khan</h3>
+                        <p>Actionist</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/satwik.jpg" alt="Satwik Kumar Panda">
+                    </div>
+                    <div class="member-info">
+                        <h3>Satwik Kumar Panda</h3>
+                        <p>Actionist</p>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="img/utkarsh.jpg" alt="Utkarsh Anand">
+                    </div>
+                    <div class="member-info">
+                        <h3>Utkarsh Anand</h3>
+                        <p>Actionist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+    </button>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.1"></script>
+    <script src="js/theme.js"></script>
+    <script src="script.js"></script>
+    <script type="module" src="js/hero-background.js"></script>
+    <script src="js/events-calendar.js"></script>
+</body>
+</html>
+
+    <script src="script.js"></script>
+    <script type="module" src="js/hero-background.js"></script>
+    <script src="js/events-calendar.js"></script>
+</body>
+</html>

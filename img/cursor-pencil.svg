@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#glow)">
+        <path d="M22 2L28 8L10 26L4 28L6 22L24 4L22 2Z" fill="#00BFB3"/>
+        <path d="M22 2L28 8L10 26L4 28L6 22L24 4L22 2Z" stroke="#464B8C" stroke-width="1.5"/>
+    </g>
+    <defs>
+        <filter id="glow" x="-4" y="-4" width="40" height="40" filterUnits="userSpaceOnUse">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feFlood flood-color="#00BFB3" flood-opacity="0.5"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+</svg>
