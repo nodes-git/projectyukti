@@ -1,11 +1,9 @@
 // Theme switcher functionality
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
-    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     
-    // Check for saved theme preference or use system preference
-    const currentTheme = localStorage.getItem('theme') || 
-                        (prefersDarkScheme.matches ? 'dark' : 'light');
+    // Check for saved theme preference, default to light
+    const currentTheme = localStorage.getItem('theme') || 'light';
     
     // Apply saved theme on load
     if (currentTheme === 'dark') {
