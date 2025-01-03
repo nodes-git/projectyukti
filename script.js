@@ -451,10 +451,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 tooltip: {
                     trigger: 'focus',
                     isHtml: true,
+                    showTitle: false,
                     textStyle: {
-                        color: '#ffffff',
+                        fontFamily: 'Cabinet Grotesk',
                         fontSize: 14,
-                        fontName: 'Cabinet Grotesk'
+                        color: '#000'
                     }
                 },
                 keepAspectRatio: true,
