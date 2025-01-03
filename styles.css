@@ -2909,8 +2909,28 @@ textarea.form-control {
 /* World Map Section */
 .world-map-section {
     padding: 4rem 0;
-    background: #f8faff;
-    text-align: center;
+    background-color: var(--section-bg);
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .world-map-section {
+    background-color: var(--section-bg);
+}
+
+[data-theme="dark"] .world-map-section h2,
+[data-theme="dark"] .world-map-section .subtitle,
+[data-theme="dark"] #global-impact h2,
+[data-theme="dark"] #global-impact .subtitle {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .world-map-section p,
+[data-theme="dark"] #global-impact p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .jvectormap-container {
+    background-color: transparent !important;
 }
 
 .world-map-section h2 {
@@ -2947,6 +2967,7 @@ textarea.form-control {
         width: 90%;
         margin: 1.5rem auto;
     }
+    
 }
 
 @media (max-width: 480px) {
@@ -3195,10 +3216,12 @@ textarea.form-control {
 .modal-content {
     position: relative;
     background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 90%;
-    width: 800px;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
 }
 
 .close-modal {
@@ -3506,10 +3529,19 @@ textarea.form-control {
     color: white;
 }
 
+
+
+@media (max-width: 608px) {
+    .world-map-section{
+        display: none;
+    }
+    
+}
 @media (max-width: 768px) {
     .events-container {
         grid-template-columns: 1fr;
     }
+    
 }
 
 /* Theme Toggle Button */
@@ -3748,4 +3780,29 @@ textarea.form-control {
         width: 50px;
         height: 50px;
     }
+}
+
+/* Map tooltip styles */
+.google-visualization-tooltip {
+    background-color: white !important;
+    padding: 8px 12px !important;
+    border: none !important;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
+    border-radius: 6px !important;
+    font-family: var(--body-font) !important;
+    font-size: 14px !important;
+    color: #000 !important;
+    z-index: 1000 !important;
+}
+
+.google-visualization-tooltip-item {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-weight: 500 !important;
+}
+
+[data-theme="dark"] .google-visualization-tooltip {
+    background-color: white !important;
+    color: #000 !important;
+    border: 1px solid #404040 !important;
 }
