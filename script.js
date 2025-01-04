@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSlideshow();
     initMobileMenu();
     initDonationForm();
+    initImageSwitching();
 
     // Header scroll effect
     const navbar = document.querySelector('.navbar');
@@ -403,6 +404,44 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    }
+
+    // Image switching in Making a Difference section
+    function initImageSwitching() {
+        const mainImage = document.querySelector('.gallery-main img');
+        const gridImages = document.querySelectorAll('.gallery-grid img');
+
+        gridImages.forEach(img => {
+            img.addEventListener('click', function() {
+                // Store current main image attributes
+                const mainSrc = mainImage.src;
+                const mainAlt = mainImage.alt;
+                const clickedImg = this;
+
+                // Add fade out effect
+                mainImage.classList.add('fade-out');
+                clickedImg.classList.add('fade-out');
+
+                // Wait for fade out to complete
+                setTimeout(() => {
+                    // Swap images
+                    mainImage.src = clickedImg.src;
+                    mainImage.alt = clickedImg.alt;
+                    clickedImg.src = mainSrc;
+                    clickedImg.alt = mainAlt;
+
+                    // Add fade in effect
+                    mainImage.classList.add('fade-in');
+                    clickedImg.classList.add('fade-in');
+
+                    // Remove fade classes after animation
+                    setTimeout(() => {
+                        mainImage.classList.remove('fade-out', 'fade-in');
+                        clickedImg.classList.remove('fade-out', 'fade-in');
+                    }, 300);
+                }, 300);
+            });
+        });
     }
 
     // Smooth scroll for navigation
