@@ -559,11 +559,19 @@
                     <div class="form-group">
                         <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                     </div>
-                    <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                    <div class="form-group phone-group">
+                        <select name="countryCode" class="country-code" required>
+                            <option value="+91">+91 (IN)</option>
+                            <option value="+1">+1 (US/CA)</option>
+                            <option value="+44">+44 (UK)</option>
+                            <option value="+61">+61 (AU)</option>
+                            <option value="+65">+65 (SG)</option>
+                            <option value="+971">+971 (UAE)</option>
+                        </select>
+                        <input type="tel" name="phone" class="form-control phone-input" placeholder="Phone Number" maxlength="10" pattern="[0-9]{10}" title="Please enter exactly 10 digits" required>
                     </div>
                     <div class="form-group">
-                        <input type="tel" name="phone" class="form-control" placeholder="Your Phone Number">
+                        <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                     </div>
                     <div class="form-group">
                         <input type="text" name="subject" class="form-control" placeholder="Subject">
@@ -659,7 +667,7 @@
                     </div>
                     <div class="form-group">
                         <label for="donorPhone">Phone Number</label>
-                        <input type="tel" id="donorPhone" class="form-control" required placeholder="Enter your phone number" pattern="[0-9]{10}">
+                        <input type="tel" id="donorPhone" class="form-control" required placeholder="Enter your phone number" maxlength="10" pattern="[0-9]{10}" title="Please enter exactly 10 digits">
                     </div>
                     <div class="form-group">
                         <label for="transactionId">Transaction ID</label>
