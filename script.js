@@ -899,6 +899,40 @@ document.addEventListener('DOMContentLoaded', () => {
             notification.remove();
         }, 3000);
     }
+
+    // Phone number validation
+    function initPhoneValidation() {
+        const phoneInputs = document.querySelectorAll('.phone-input');
+        
+        phoneInputs.forEach(input => {
+            input.addEventListener('input', function(e) {
+                // Remove any non-numeric characters
+                this.value = this.value.replace(/[^0-9]/g, '');
+                
+                // Limit to 10 digits
+                if (this.value.length > 10) {
+                    this.value = this.value.slice(0, 10);
+                }
+            });
+
+            input.addEventListener('invalid', function(e) {
+                if (this.value.length !== 10) {
+                    this.setCustomValidity('Please enter exactly 10 digits');
+                } else {
+                    this.setCustomValidity('');
+                }
+            });
+
+            input.addEventListener('input', function(e) {
+                this.setCustomValidity('');
+            });
+        });
+    }
+
+    // Initialize phone validation
+    document.addEventListener('DOMContentLoaded', function() {
+        initPhoneValidation();
+    });
 });
 
 // Loading screen handler
