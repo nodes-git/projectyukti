@@ -1262,6 +1262,32 @@ textarea.form-control {
     resize: vertical;
 }
 
+.phone-group {
+    display: flex;
+    gap: 10px;
+}
+
+.country-code {
+    width: 120px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: #333;
+    font-size: 14px;
+}
+
+.phone-input {
+    flex: 1;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .country-code {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #fff;
+}
+
 .submit-btn {
     background: var(--primary-color);
     color: #fff;
