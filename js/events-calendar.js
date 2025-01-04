@@ -75,7 +75,18 @@ function renderCalendar() {
 }
 
 function selectDate(year, month, day) {
-    selectedDate = new Date(year, month, day);
+    const newSelectedDate = new Date(year, month, day);
+    
+    // If clicking the same date, deselect it
+    if (selectedDate && 
+        selectedDate.getDate() === newSelectedDate.getDate() && 
+        selectedDate.getMonth() === newSelectedDate.getMonth() && 
+        selectedDate.getFullYear() === newSelectedDate.getFullYear()) {
+        selectedDate = null;
+    } else {
+        selectedDate = newSelectedDate;
+    }
+    
     renderCalendar();
     updateEventsList();
 }
@@ -83,6 +94,7 @@ function selectDate(year, month, day) {
 function updateEventsList() {
     const eventsList = document.getElementById('eventsList');
     let filteredEvents = events;
+    const now = new Date();
     
     if (selectedDate) {
         filteredEvents = events.filter(event => {
@@ -99,37 +111,62 @@ function updateEventsList() {
                    eventDate.getFullYear() === currentDate.getFullYear();
         });
     }
+
+    // Separate past and future events
+    const pastEvents = filteredEvents.filter(event => new Date(event.event_date) < now);
+    const futureEvents = filteredEvents.filter(event => new Date(event.event_date) >= now);
     
-    if (filteredEvents.length === 0) {
-        eventsList.innerHTML = '<div class="event-card">No events scheduled for this period.</div>';
+    // Sort future events by date (ascending)
+    futureEvents.sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
+    
+    // Sort past events by date (descending)
+    pastEvents.sort((a, b) => new Date(b.event_date) - new Date(a.event_date));
+
+    // Combine future events followed by past events
+    const sortedEvents = [...futureEvents, ...pastEvents];
+
+    if (sortedEvents.length === 0) {
+        eventsList.innerHTML = '<p class="no-events">No events scheduled for this period.</p>';
         return;
     }
-    
-    eventsList.innerHTML = filteredEvents.map(event => {
+
+    let eventsHTML = '<div class="events-list-inner">';
+    sortedEvents.forEach(event => {
         const eventDate = new Date(event.event_date);
-        const eventTime = new Date(`${event.event_date}T${event.event_time}`);
-        
-        return `
-            <div class="event-card">
-                <h4>${event.event_name}</h4>
-                <div class="event-details">
-                    <div>${event.event_description}</div>
-                    <div class="event-time">
-                        ${eventTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </div>
-                    <div class="event-fee">
-                        ${event.is_free ? 
-                            '<span class="event-free">Free</span>' : 
-                            `₹${event.entry_fee}`}
-                    </div>
-                    ${event.location ? `<div>📍 ${event.location}</div>` : ''}
-                    ${event.registration_link ? 
-                        `<a href="${event.registration_link}" class="register-button" target="_blank">Register Now</a>` : 
-                        ''}
+        const isPast = eventDate < now;
+        const formattedDate = eventDate.toLocaleDateString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        const formattedTime = eventDate.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        eventsHTML += `
+            <div class="event-item ${isPast ? 'past-event' : ''}">
+                <div class="event-date">
+                    <i class="fas fa-calendar-alt"></i>
+                    ${formattedDate} at ${formattedTime}
                 </div>
+                <h4 class="event-title">${event.event_name}</h4>
+                <p class="event-description">${event.event_description || ''}</p>
+                ${event.location ? `<p class="event-location"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>` : ''}
+                <div class="event-fee">
+                    ${event.is_free ? 
+                        '<span class="event-free">Free</span>' : 
+                        `₹${event.entry_fee}`}
+                </div>
+                ${event.registration_link ? 
+                    `<a href="${event.registration_link}" class="register-button" target="_blank">Register Now</a>` : 
+                    ''}
             </div>
         `;
-    }).join('');
+    });
+    eventsHTML += '</div>';
+    eventsList.innerHTML = eventsHTML;
 }
 
 // Navigation handlers
@@ -143,6 +180,22 @@ document.getElementById('nextMonth').addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
     updateEventsList();
+});
+
+// Refresh button handler
+document.getElementById('refreshEvents').addEventListener('click', async () => {
+    const refreshBtn = document.getElementById('refreshEvents');
+    refreshBtn.classList.add('spinning');
+    
+    try {
+        await fetchEvents(); // This will automatically update the calendar and events list
+    } catch (error) {
+        console.error('Error refreshing events:', error);
+    } finally {
+        setTimeout(() => {
+            refreshBtn.classList.remove('spinning');
+        }, 1000);
+    }
 });
 
 // Initial load - wait for both DOM and Supabase
