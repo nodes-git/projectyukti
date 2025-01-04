@@ -6,6 +6,7 @@
     <title>Project Yukti - Empowering Underprivileged Children</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-jvectormap-2.0.5/jquery-jvectormap.css" type="text/css" media="screen"/>
     <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="logo-light.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&f[]=cabinet-grotesk@100,200,300,400,500,600,700&display=swap">
 </head>
@@ -291,7 +292,7 @@
             </div>
             
             <div class="about-buttons">
-                <a href="#contact" class="btn-primary">Get Involved</a>
+                <a href="#contact" class="btn-primary cbg">Get Involved</a>
                 <a href="#team" class="btn-secondary">Our Team</a>
             </div>
         </div>
@@ -313,9 +314,12 @@
                 <div class="events-container">
                     <div class="events-calendar">
                         <div class="calendar-header">
-                            <button id="prevMonth" class="calendar-nav">&lt;</button>
+                            <button id="prevMonth" class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
                             <h3 id="currentMonth"></h3>
-                            <button id="nextMonth" class="calendar-nav">&gt;</button>
+                            <button id="nextMonth" class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                            <button id="refreshEvents" class="calendar-refresh-btn" title="Refresh Events">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
                         </div>
                         <div class="calendar-grid">
                             <div class="calendar-days">
@@ -567,7 +571,7 @@
                     <div class="form-group">
                         <textarea name="message" class="form-control" placeholder="Your Message" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn cbg">Send Message</button>
                 </form>
             </div>
         </div>
@@ -594,9 +598,21 @@
                 <div class="footer-contact">
                     <h4>Contact Us</h4>
                     <div class="contact-info">
-                        <div class="contact-item">
+                        <div class="contact-item location-item">
                             <i class="fas fa-map-marker-alt"></i>
                             <p>Bhubaneswar Odisha, India</p>
+                            <div class="location-map">
+                                <iframe
+                                    width="300"
+                                    height="200"
+                                    frameborder="0"
+                                    style="border:0"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119743.40927239348!2d85.75041889726566!3d20.300829099999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909d2d5170aa5%3A0xfc580e2b68b33fa8!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1704389142612!5m2!1sen!2sin"
+                                    allowfullscreen=""
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
@@ -733,12 +749,6 @@
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.1"></script>
     <script src="js/theme.js"></script>
-    <script src="script.js"></script>
-    <script type="module" src="js/hero-background.js"></script>
-    <script src="js/events-calendar.js"></script>
-</body>
-</html>
-
     <script src="script.js"></script>
     <script type="module" src="js/hero-background.js"></script>
     <script src="js/events-calendar.js"></script>
