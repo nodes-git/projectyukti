@@ -53,10 +53,10 @@ function renderCalendar() {
     for (let day = 1; day <= daysInMonth; day++) {
         const date = new Date(year, month, day);
         const hasEvent = events.some(event => {
-            const eventDate = new Date(event.event_date);
-            return eventDate.getDate() === day && 
-                   eventDate.getMonth() === month && 
-                   eventDate.getFullYear() === year;
+            const [eventYear, eventMonth, eventDay] = event.event_date.split('-').map(Number);
+            return eventDay === day && 
+                   eventMonth === month + 1 && 
+                   eventYear === year;
         });
         
         const isSelected = selectedDate && 
@@ -98,29 +98,55 @@ function updateEventsList() {
     
     if (selectedDate) {
         filteredEvents = events.filter(event => {
-            const eventDate = new Date(event.event_date);
-            return eventDate.getDate() === selectedDate.getDate() && 
-                   eventDate.getMonth() === selectedDate.getMonth() && 
-                   eventDate.getFullYear() === selectedDate.getFullYear();
+            const [eventYear, eventMonth, eventDay] = event.event_date.split('-').map(Number);
+            return eventDay === selectedDate.getDate() && 
+                   eventMonth === selectedDate.getMonth() + 1 && 
+                   eventYear === selectedDate.getFullYear();
         });
     } else {
         // Show current month's events if no date selected
         filteredEvents = events.filter(event => {
-            const eventDate = new Date(event.event_date);
-            return eventDate.getMonth() === currentDate.getMonth() && 
-                   eventDate.getFullYear() === currentDate.getFullYear();
+            const [eventYear, eventMonth, eventDay] = event.event_date.split('-').map(Number);
+            return eventMonth === currentDate.getMonth() + 1 && 
+                   eventYear === currentDate.getFullYear();
         });
     }
 
     // Separate past and future events
-    const pastEvents = filteredEvents.filter(event => new Date(event.event_date) < now);
-    const futureEvents = filteredEvents.filter(event => new Date(event.event_date) >= now);
+    const pastEvents = filteredEvents.filter(event => {
+        const [eventYear, eventMonth, eventDay] = event.event_date.split('-').map(Number);
+        const [hours, minutes] = event.event_time.split(':').map(Number);
+        const eventDateTime = new Date(eventYear, eventMonth - 1, eventDay, hours, minutes);
+        return eventDateTime < now;
+    });
+    const futureEvents = filteredEvents.filter(event => {
+        const [eventYear, eventMonth, eventDay] = event.event_date.split('-').map(Number);
+        const [hours, minutes] = event.event_time.split(':').map(Number);
+        const eventDateTime = new Date(eventYear, eventMonth - 1, eventDay, hours, minutes);
+        return eventDateTime >= now;
+    });
     
     // Sort future events by date (ascending)
-    futureEvents.sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
+    futureEvents.sort((a, b) => {
+        const [eventYearA, eventMonthA, eventDayA] = a.event_date.split('-').map(Number);
+        const [hoursA, minutesA] = a.event_time.split(':').map(Number);
+        const eventDateTimeA = new Date(eventYearA, eventMonthA - 1, eventDayA, hoursA, minutesA);
+        const [eventYearB, eventMonthB, eventDayB] = b.event_date.split('-').map(Number);
+        const [hoursB, minutesB] = b.event_time.split(':').map(Number);
+        const eventDateTimeB = new Date(eventYearB, eventMonthB - 1, eventDayB, hoursB, minutesB);
+        return eventDateTimeA - eventDateTimeB;
+    });
     
     // Sort past events by date (descending)
-    pastEvents.sort((a, b) => new Date(b.event_date) - new Date(a.event_date));
+    pastEvents.sort((a, b) => {
+        const [eventYearA, eventMonthA, eventDayA] = a.event_date.split('-').map(Number);
+        const [hoursA, minutesA] = a.event_time.split(':').map(Number);
+        const eventDateTimeA = new Date(eventYearA, eventMonthA - 1, eventDayA, hoursA, minutesA);
+        const [eventYearB, eventMonthB, eventDayB] = b.event_date.split('-').map(Number);
+        const [hoursB, minutesB] = b.event_time.split(':').map(Number);
+        const eventDateTimeB = new Date(eventYearB, eventMonthB - 1, eventDayB, hoursB, minutesB);
+        return eventDateTimeB - eventDateTimeA;
+    });
 
     // Combine future events followed by past events
     const sortedEvents = [...futureEvents, ...pastEvents];
@@ -132,18 +158,29 @@ function updateEventsList() {
 
     let eventsHTML = '<div class="events-list-inner">';
     sortedEvents.forEach(event => {
-        const eventDate = new Date(event.event_date);
-        const isPast = eventDate < now;
-        const formattedDate = eventDate.toLocaleDateString('en-US', {
+        // Combine event_date and event_time into a single Date object
+        const [year, month, day] = event.event_date.split('-').map(Number);
+        const [hours, minutes] = event.event_time.split(':').map(Number);
+        const eventDateTime = new Date(year, month - 1, day, hours, minutes);
+        
+        const isPast = eventDateTime < now;
+        
+        // Format the date in Indian format
+        const formattedDate = new Intl.DateTimeFormat('en-IN', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
-            day: 'numeric'
-        });
-        const formattedTime = eventDate.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+            day: 'numeric',
+            timeZone: 'Asia/Kolkata'
+        }).format(eventDateTime);
+
+        // Format the time in 12-hour format with AM/PM
+        const formattedTime = new Intl.DateTimeFormat('en-IN', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true,
+            timeZone: 'Asia/Kolkata'
+        }).format(eventDateTime);
 
         eventsHTML += `
             <div class="event-item ${isPast ? 'past-event' : ''}">
